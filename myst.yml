@@ -1,0 +1,26 @@
+version: 1
+
+project:
+  title: Versioneer Research
+  subject: Versioneer Research
+  github: https://github.com/versioneer-inc/research
+  license:
+    code: Apache 2.0
+    content: CC-BY-4.0
+  toc:
+    - file: index.md
+    - file: oci-artifacts/oci-artifacts.md
+      children:
+        - file: oci-artifacts/oras_101.md
+        - file: oci-artifacts/paper-oci-supply-chain.md
+          children:
+            - file: oci-artifacts/paper-evaluation-setup.ipynb
+            - file: oci-artifacts/paper-results.ipynb
+
+site:
+  title: Versioneer Research
+  template: book-theme
+  options:
+    favicon: public/images/favicon_versioneer.ico
+    logo: public/images/logo_versioneer_white.png
+    style: public/main.css

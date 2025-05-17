@@ -1,0 +1,36 @@
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+.text-blue-600,
+.text-blue-800,
+.hover\:text-blue-600:hover {
+  color: #A3B18A;
+}
+
+.border-blue-500,
+.border-l-blue-500,
+.hover\:border-blue-600:hover {
+  border-color: #A3B18A
+}
+
+.bg-blue-300\/30 {
+  background: #A3B18A;
+  outline: none;
+  font-weight: bold;
+}
+
+.bg-blue-300\/30,
+.bg-blue-300\/30 .text-blue-800 {
+  color: white;
+}
+
+.bg-blue-50 {
+  background: #00324722;
+}
+
+footer[data-testid="site-footer"] {
+  display: none !important;
+}
