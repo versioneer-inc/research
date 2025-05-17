@@ -1,7 +1,48 @@
-*.log
-tmp/
-venv/
-__pycache__/
-.DS_Store
-.env
+# Ignore MyST build output
 _build/
+site/
+site-root/
+
+# Ignore Python cache and temp files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+*.log
+
+# Jupyter Notebook checkpoints and runtime
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+*.nb.html
+.jupyter/
+.profile_default/
+*.bak
+
+# VSCode / PyCharm / IDE configs
+.vscode/
+.idea/
+*.code-workspace
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment / virtualenvs
+.env
+.venv/
+env/
+venv/
+
+# Node modules (for mystmd CLI)
+node_modules/
+package-lock.json
+npm-debug.log
+
+# Build artifacts
+*.tar.gz
+*.zip
+*.tar
+*.tgz
