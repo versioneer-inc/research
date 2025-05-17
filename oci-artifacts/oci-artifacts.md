@@ -47,13 +47,7 @@ OCI artifacts shift the paradigm: from data *as storage* to data *as supply chai
 
 With our background in Earth Observation (EO), we conducted a focused study to assess how well OCI can serve as a packaging and distribution framework for complex EO data products. The result is our research paper:
 
-**_“Towards Standardization of the Earth Observation Data Product Supply Chain – Are OCI Artifacts the Key to Ubiquitous and Scalable EO Data Handling?”_**  
-To be presented at **[FOSS4G Europe 2025](https://talks.osgeo.org/foss4g-europe-2025/talk/HNZK37/)**.
-
-The paper explores how OCI-based registries can act as a unifying layer for distributing EO products, including metadata, partitioned assets, and lineage. It also presents a  benchmark setup, registry compatibility analysis, and trade-offs across multiple implementations.
-
-→ Read the [full paper](/_static/oci-supply-chain_draft.pdf) (PDF) 
-→ Explore our [evaluation setup](paper-evaluation-setup.ipynb) and [results](paper-results.ipynb)
+**_“Towards Standardization of the Earth Observation Data Product Supply Chain – Are OCI Artifacts the Key to Ubiquitous and Scalable EO Data Handling?”_** → [Read more](paper-oci-supply-chain.md)
 
 # Beyond Data Supply Chains: Toward a Trusted, Reproducible Data Ecosystem
 
@@ -61,9 +55,6 @@ We believe that the architecture and principles behind OCI artifacts are not onl
 
 Our objective—both in research and in building production-ready, commercial-grade infrastructure—is to demonstrate that OCI registries, when combined with standardized artifact formats, layered storage, and rich domain metadata (such as [STAC](https://stacspec.org/) in Earth Observation), can support complete data lifecycles: from raw asset ingestion to structured packaging, distribution, and validation. This enables a Lakehouse-style architecture where versioned, immutable data packages coexist with flexible and efficient storage and access to both structured and unstructured mutable content.
 
-With capabilities like digest-based addressing, partial access, and artifact referrers, OCI supports packaging models that are not only portable and interoperable, but also verifiable and policy-aware. Its decentralized infrastructure with centralized governance offers a compelling foundation for implementing **data mesh principles**—empowering data teams to take ownership of their products, much like microservices** and DevOps** transformed software development.
-
-These ideas are further explored in our concept paper:
+With capabilities like digest-based addressing, partial access, and artifact referrers, OCI supports packaging models that are not only portable and interoperable, but also verifiable and policy-aware. Its decentralized infrastructure with centralized governance offers a compelling foundation for implementing **data mesh principles**—empowering data teams to take ownership of their products, much like microservices** and DevOps** transformed software development. These ideas are further explored in our concept paper:
 
 **_“Building a Trusted and Reproducible Data Ecosystem with OCI”_** → [Read more](data-ecosystem-with-oci.md)
-
