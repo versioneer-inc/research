@@ -1,30 +1,28 @@
 #!/bin/bash
 set -e
 
-# Prepare working directory
+# Step 1: Prepare
 mkdir -p data
-echo "dummy image data" > data/imagery.tif
-echo '{ "type": "Feature", "geometry": null, "properties": { "eo:bands": ["B04"] } }' > data/stac_item.json
+cp my-imagery.tif data/imagery.tif
+cp my-stac.json data/stac_item.json
 echo '{}' > data/config.json
 
-# Build OCI layout
-oras push --oci-layout eo-layout:eo/products:v1 \
+# Step 2: Create an OCI Layout
+oras push --oci-layout my-eo-package:v1 \
+  --artifact-type application/vnd.earth-observation.product.v1+json \
   data/imagery.tif:image/tiff \
   data/stac_item.json:application/geo+json \
   data/config.json:application/vnd.oci.artifact.config.v1+json
 
-# Start local registry if not running
-if ! docker ps | grep -q registry; then
-  docker run -d -p 5000:5000 --name registry registry:2
-fi
+# Step 3: Start a Local Registry
+docker run -d -p 5000:5000 --name registry registry:2 || true
 
-# Push to local registry
-oras cp --from-oci-layout eo-layout:eo/products:v1 \
-        --to localhost:5000/eo/products:v1
+# Step 4: Push to Registry
+oras cp \
+  --from-oci-layout my-eo-package:v1 \
+  localhost:5000/my-eo-package:v1
 
-# Pull back and verify
-mkdir -p pulled
-oras pull localhost:5000/eo/products:v1 --output pulled
+# Step 5: Pull Back from Registry
+oras pull localhost:5000/my-eo-package:v1 --output ./retrieved
 
 echo "✅ Artifact pushed and pulled successfully."
-ls -lh pulled

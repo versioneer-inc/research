@@ -2,33 +2,17 @@
 title: OCI Registry As Storage 101
 ---
 
-# Packaging and Distributing Domain-Specific Artifacts via OCI Registries
+# OCI Artifacts Everywhere
 
-ORAS (OCI Registry As Storage) is a powerful set of tools that enables you to package, distribute, and version any digital asset using OCI-compliant registries. While originally built for container images, the Open Container Initiative (OCI) specifications support a much broader set of use cases including:
+The Open Container Initiative (OCI) established a widely adopted set of standards ([OCI Image Layout Spec](https://github.com/opencontainers/image-spec), [OCI Distribution Spec](https://github.com/opencontainers/distribution-spec) for interacting with container registries. Originally popularized by Docker for managing container images, this framework has since evolved into the broader concept of OCI artifacts. [ORAS](https://oras.land/) (OCI Registry As Storage) is a versatile toolkit that enables the pushing and pulling of arbitrary OCI artifacts to and from OCI-compliant registries.
 
-- Earth Observation data (e.g., GeoTIFFs, STAC metadata)
-- Machine Learning models
-- Helm charts
-- Software documentation and binary artifacts
+While initially regarded as a workaround, the use of OCI registries for non-container content has gained mainstream acceptance—particularly for distributing configuration bundles, authorization policies, and more recently, AI/ML models. These artifacts benefit from standardized, content-addressable storage that ensures immutability, traceability, and efficient distribution.
 
-This guide outlines the core principles, practical usage, and customization strategies for applying ORAS to data workflows beyond containers.
+Our own journey with OCI artifacts began through Helm charts, Kubernetes manifests in GitOps workflows (e.g., FluxCD), and Open Policy Agent (OPA) rules. Later, the growing importance of AI and large language models (LLMs) reintroduced us to this approach through KServe's OCI-based model serving ([Modelcars](https://kserve.github.io/website/latest/modelserving/storage/oci/)) and now [Docker Model Runner](https://docs.docker.com/model-runner). This experience significantly influenced our thinking: instead of merely providing guarded access to data, we began exploring scalable strategies for distributing curated, self-contained, and verifiable data packages.
 
----
+## Artifact Structure
 
-## 1. Key Concepts
-
-### OCI Artifact Structure
-
-An OCI artifact consists of:
-
-- **Config blob** – a small JSON object, typically used for metadata
-- **Layer blobs** – your actual files (e.g., `.tif`, `.json`, `.tar.gz`)
-- **Manifest** – a JSON document referencing config and layers
-- **Index** – used in OCI layout to reference manifests via tags
-
-### Content-Addressable Storage
-
-OCI artifacts are composed of immutable blobs stored by digest:
+Each OCI artifact consists of immutable blobs stored by their SHA256 digest:
 
 ```
 oci-layout/
@@ -37,26 +21,102 @@ oci-layout/
 └── blobs/
     └── sha256/
         ├── <config>
-        ├── <image>
+        ├── <data>
         ├── <metadata>
-        └── <manifest>
 ```
 
-This guarantees deduplication, integrity, and traceability.
+This layout directly maps to:
 
----
+- **Layer blobs** – the actual data (e.g., `.tar`, `.tar.gz` `.json`, `.tif`)
+- **Config blob** – small JSON metadata object
+- **Manifest** – a JSON file referencing the config and layers
 
-## 2. Domain-Specific Customization
+This ensures deduplication, integrity, and compatibility across all OCI-compliant registries.
 
-| Feature                  | Standardized by OCI | Customizable by Domain |
-|--------------------------|----------------------|-------------------------|
-| Manifest structure       | ✔                   | ─                       |
-| Media types              | ─                   | ✔                       |
-| Config blob content      | ─                   | ✔                       |
-| Layer annotations        | ─                   | ✔                       |
-| Tagging convention       | ✔                   | ✔ (e.g. `org.opencontainers.ref.name`) |
+## Domain-Specific Examples
 
-### Example: Earth Observation
+While the core structure of OCI artifacts is standardized, the introduction of arbitrary custom media types has made media type definitions and content semantics inherently domain-specific. This extensibility has enabled the ecosystem to evolve beyond container images, supporting diverse use cases such as Helm charts, AI/ML models, and Earth Observation (EO) datasets.
+
+### Docker Image
+[OCI Spec](https://github.com/opencontainers/image-spec/blob/main/media-types.md) fictitious example
+
+```json
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.oci.image.manifest.v1+json",
+  "config": {
+    "mediaType": "application/vnd.oci.image.config.v1+json",
+    "digest": "sha256:1111aaaa2222bbbb3333cccc4444dddd5555eeee6666ffff7777gggg8888hhhh",
+    "size": 7023
+  },
+  "layers": [
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:aaaabbbbccccddddeeeeffff0000111122223333444455556666777788889999",
+      "size": 32654
+    },
+    {
+      "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+      "digest": "sha256:9999888877776666555544443333222211110000fffeddeeddbbccaa99887766",
+      "size": 98765
+    }
+  ]
+}
+```
+
+### Helm Chart
+[Helm Docs](https://helm.sh/docs/topics/registries/) listed example with provenance file
+
+```json
+{
+  "schemaVersion": 2,
+  "config": {
+    "mediaType": "application/vnd.cncf.helm.config.v1+json",
+    "digest": "sha256:8ec7c0f2f6860037c19b54c3cfbab48d9b4b21b485a93d87b64690fdb68c2111",
+    "size": 117
+  },
+  "layers": [
+    {
+      "mediaType": "application/vnd.cncf.helm.chart.content.v1.tar+gzip",
+      "digest": "sha256:1b251d38cfe948dfc0a5745b7af5ca574ecb61e52aed10b19039db39af6e1617",
+      "size": 2487
+    },
+    {
+      "mediaType": "application/vnd.cncf.helm.chart.provenance.v1.prov",
+      "digest": "sha256:3e207b409db364b595ba862cdc12be96dcdad8e36c59a03b7b3b61c946a5741a",
+      "size": 643
+    }
+  ]
+}
+```
+
+### AI/ML Model
+[Docker Docs - Beta](https://docs.docker.com/model-runner/) fictitious example
+
+```json
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.oci.image.manifest.v1+json",
+  "config": {
+    "mediaType": "application/vnd.docker.model.config.v1+json",
+    "digest": "sha256:abc123...",
+    "size": 512
+  },
+  "layers": [
+    {
+      "mediaType": "application/octet-stream",
+      "digest": "sha256:def456...",
+      "size": 104857600,
+      "annotations": {
+        "framework": "PyTorch"
+      }
+    }
+  ]
+}
+```
+
+### EO Data
+invented example
 
 ```json
 {
@@ -88,129 +148,83 @@ This guarantees deduplication, integrity, and traceability.
 }
 ```
 
-### Example: Helm Chart
+> Note: STAC metadata can be embedded in a layer or placed in the config blob. This is a design decision and should align with intended use cases.
 
-```json
-{
-  "schemaVersion": 2,
-  "mediaType": "application/vnd.oci.image.manifest.v1+json",
-  "config": {
-    "mediaType": "application/vnd.cncf.helm.config.v1+json",
-    "digest": "sha256:aaaabbbb...",
-    "size": 123
-  },
-  "layers": [
-    {
-      "mediaType": "application/vnd.cncf.helm.chart.content.v1.tar+gzip",
-      "digest": "sha256:cccddd...",
-      "size": 123456
-    }
-  ]
-}
-```
+To summarize, the following table highlights the high extensibility of the OCI artifact format. While the manifest structure is standardized, key elements such as media types, config contents, and layer annotations can be customized to support domain-specific needs.
 
-### Example: ML Model (Docker Model Registry Proposal)
+| Feature                  | Standardized by OCI | Customizable by Domain        |
+|--------------------------|----------------------|-------------------------------|
+| Manifest structure       | ✔                   | —                             |
+| Media types              | —                   | ✔                             |
+| Config blob content      | —                   | ✔                             |
+| Layer annotations        | —                   | ✔                             |
+| Tagging convention       | ✔                   | ✔ (e.g., `ref.name`)          |
 
-```json
-{
-  "schemaVersion": 2,
-  "mediaType": "application/vnd.oci.image.manifest.v1+json",
-  "config": {
-    "mediaType": "application/vnd.docker.model.config.v1+json",
-    "digest": "sha256:abc123...",
-    "size": 512
-  },
-  "layers": [
-    {
-      "mediaType": "application/octet-stream",
-      "digest": "sha256:def456...",
-      "size": 104857600,
-      "annotations": {
-        "framework": "PyTorch"
-      }
-    }
-  ]
-}
-```
+## OCI Registry API Overview
+
+The [OCI Distribution Specification](https://github.com/opencontainers/distribution-spec/) defines a minimal HTTP API for interacting with registries:
+
+| Endpoint                              | Purpose                     |
+|---------------------------------------|-----------------------------|
+| `GET /v2/`                             | Ping registry               |
+| `GET /v2/<name>/manifests/<tag>`      | Fetch manifest              |
+| `PUT /v2/<name>/manifests/<tag>`      | Upload manifest             |
+| `GET /v2/<name>/blobs/<digest>`       | Download blob               |
+| `HEAD /v2/<name>/blobs/<digest>`      | Check blob existence        |
+| `POST /v2/<name>/blobs/uploads/`      | Begin blob upload           |
+| `PUT /v2/<name>/blobs/uploads/<uuid>` | Complete blob upload        |
+
+The familiar pull and push operations in OCI are composed of multiple lightweight API calls, internally optimized through digest-based de-duplication. Before uploading a blob, registries check whether it already exists using its content-derived SHA256 digest. If it does, the blob is skipped—ensuring that redundant transfers are avoided. Similarly, during pulls, only missing blobs are fetched, allowing for highly efficient reuse and incremental synchronization.
+
+This architecture makes OCI artifacts not only portable and immutable, but also inherently efficient and scalable. Thanks to their adherence to the OCI Distribution Specification, these artifacts are broadly interoperable across a wide range of registry platforms—including Docker Hub, Quay.io, AWS Elastic Container Registry (ECR), Harbor, and local self-hosted registries.
+
+More on this approach, real-world use cases, and a detailed evaluation of registry behavior across implementations can be found in our accompanying paper.
 
 ---
 
-## 3. Practical Workflow
+## Practical Workflow
 
-### Step 1: Prepare Files
+### Step 1: Prepare
 
 ```bash
 mkdir -p data
-cp your-imagery.tif data/imagery.tif
-cp your-stac.json data/stac_item.json
+cp my-imagery.tif data/imagery.tif
+cp my-stac.json data/stac_item.json
 echo '{}' > data/config.json
 ```
 
 ### Step 2: Create an OCI Layout
 
 ```bash
-oras push --oci-layout eo-layout:eo/products:v1   data/imagery.tif:image/tiff   data/stac_item.json:application/geo+json   data/config.json:application/vnd.oci.artifact.config.v1+json
+oras push --oci-layout eo-layout:eo/products:v1 \
+  --artifact-type application/vnd.my-earth-observation-product.v1 \
+  data/imagery.tif:image/tiff \
+  data/stac_item.json:application/geo+json \
+  data/config.json:application/vnd.oci.artifact.config.v1+json
 ```
 
 ### Step 3: Push to a Registry
 
-#### Start a Local Registry:
+Start a local registry:
 
 ```bash
 docker run -d -p 5000:5000 --name registry registry:2
 ```
 
-#### Push the Layout to the Registry:
+Push the layout:
 
 ```bash
-oras cp --from-oci-layout eo-layout:eo/products:v1         --to localhost:5000/eo/products:v1
+oras cp \
+  --from-oci-layout eo-layout:eo/products:v1 \
+  --to localhost:5000/eo/products:v1
 ```
 
-#### Pull Back:
+Note: oras also supports to push directly!
+
+Pull back:
 
 ```bash
 oras pull localhost:5000/eo/products:v1 --output ./retrieved
 ```
 
----
-
-## 4. Companion Shell Script
-
-You can find an automated version of the workflow described above in:
-
-📄 [`scripts/oras.sh`](./scripts/oras.sh)
-
-This script:
-- Prepares example data files
-- Builds an OCI layout
-- Starts a local registry (if not already running)
-- Pushes the layout
-- Pulls it back and lists the results
-
----
-
-## 5. OCI Registry API Overview
-
-The [OCI Distribution Spec](https://github.com/opencontainers/distribution-spec/) defines how clients interact with registries.
-
-| Endpoint                             | Purpose                         |
-|--------------------------------------|----------------------------------|
-| `GET /v2/`                            | Ping the registry                |
-| `GET /v2/<name>/manifests/<tag>`     | Fetch manifest by tag            |
-| `PUT /v2/<name>/manifests/<tag>`     | Upload manifest                  |
-| `GET /v2/<name>/blobs/<digest>`      | Download blob                    |
-| `HEAD /v2/<name>/blobs/<digest>`     | Check if blob exists             |
-| `POST /v2/<name>/blobs/uploads/`     | Begin blob upload                |
-| `PUT /v2/<name>/blobs/uploads/<uuid>`| Complete blob upload             |
-
----
-
-## References
-
-- ORAS CLI Documentation – https://oras.land/
-- OCI Image Layout Spec – https://github.com/opencontainers/image-spec/blob/main/image-layout.md
-- OCI Distribution Spec – https://github.com/opencontainers/distribution-spec/
-- STAC Specification – https://stacspec.org/
-- Helm OCI Chart Spec – https://helm.sh/docs/topics/registries/
-- Docker Model Artifacts – https://www.docker.com/blog/publish-discover-models-on-docker-hub/
-
+Please find the full example as shell script [here](./scripts/oras.sh).

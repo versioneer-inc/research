@@ -5,7 +5,7 @@ project:
   subject: Versioneer Research
   github: https://github.com/versioneer-inc/research
   license:
-    code: Apache 2.0
+    code: Apache-2.0
     content: CC-BY-4.0
   toc:
     - file: index.md

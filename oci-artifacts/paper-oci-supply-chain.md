@@ -1,12 +1,11 @@
 ---
 title: "Paper: Towards Standardization of the Earth Observation Data Product Supply Chain"
 ---
-# Introduction
+# Are OCI Artifacts the Key to Ubiquitous and Scalable EO Data Handling?
 
 The [Open Container Initiative](https://opencontainers.org) (OCI) —originally developed to standardize container images and registries—has evolved into a powerful, open-ended platform for managing and distributing data artifacts. The introduction of the [OCI Artifact extension](https://github.com/opencontainers/image-spec/blob/main/artifacts-guidance.md) opened the door for entirely new use cases beyond traditional software deployment.
 
 We see the true strength of this ecosystem not just in its design, but in its **ubiquity**: millions of OCI-compliant registries like [Docker Hub](https://hub.docker.com/), [AWS Elastic Container Registry (ECR)](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html), [Quay.io](https://quay.io/), [Harbor](https://goharbor.io/), and others are already in operation, battle-tested at scale, and supported across clouds, platforms, and tools. This makes OCI a natural foundation for solving long-standing challenges in data packaging, distribution, and reproducibility.
-
 
 # Why ORAS Matters
 
