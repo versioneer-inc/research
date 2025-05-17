@@ -42,11 +42,6 @@ jobs:
       - name: Build MyST site
         run: myst build --html
 
-      - name: Add .nojekyll and CNAME
-        run: |
-          touch _build/html/.nojekyll
-          echo "research.versioneer.at" > _build/html/CNAME
-
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
