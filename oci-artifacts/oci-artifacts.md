@@ -52,7 +52,7 @@ To be presented at **[FOSS4G Europe 2025](https://talks.osgeo.org/foss4g-europe-
 
 The paper explores how OCI-based registries can act as a unifying layer for distributing EO products, including metadata, partitioned assets, and lineage. It also presents a  benchmark setup, registry compatibility analysis, and trade-offs across multiple implementations.
 
-→ Read the [full paper](/public/papers/oci-supply-chain_draft.pdf) (PDF) 
+→ Read the [full paper](/papers/oci-supply-chain_draft.pdf) (PDF) 
 → Explore our [evaluation setup](paper-evaluation-setup.ipynb) and [results](paper-results.ipynb)
 
 # Beyond Data Supply Chains: Toward a Trusted, Reproducible Data Ecosystem
