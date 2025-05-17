@@ -1,5 +1,7 @@
 ---
 title: OCI Registry As Storage 101
+date: 2025-05-15
+author: Stefan Achtsnit
 ---
 
 # OCI Artifacts Everywhere

@@ -14,8 +14,10 @@ project:
         - file: oci-artifacts/oras_101.md
         - file: oci-artifacts/paper-oci-supply-chain.md
           children:
+            - file: oci-artifacts/paper-abstract.md
             - file: oci-artifacts/paper-evaluation-setup.ipynb
             - file: oci-artifacts/paper-results.ipynb
+        - file: oci-artifacts/data-ecosystem-with-oci.md
 
 site:
   title: Versioneer Research

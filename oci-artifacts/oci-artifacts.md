@@ -1,5 +1,7 @@
 ---
 title: OCI Artifacts for Data Supply Chains
+date: 2025-05-15
+author: Stefan Achtsnit
 ---
 # Introduction
 
@@ -50,8 +52,8 @@ To be presented at **[FOSS4G Europe 2025](https://talks.osgeo.org/foss4g-europe-
 
 The paper explores how OCI-based registries can act as a unifying layer for distributing EO products, including metadata, partitioned assets, and lineage. It also presents a  benchmark setup, registry compatibility analysis, and trade-offs across multiple implementations.
 
-→ [Read the full paper (PDF)](/link/to/paper)  
-→ [Explore our evaluation setup and test results](/link/to/evaluation)
+→ Read the [full paper](/link/to/paper) (PDF) 
+→ Explore our [evaluation setup](paper-evaluation-setup.ipynb) and [results](paper-results.ipynb)
 
 # Beyond Data Supply Chains: Toward a Trusted, Reproducible Data Ecosystem
 
@@ -63,5 +65,5 @@ With capabilities like digest-based addressing, partial access, and artifact ref
 
 These ideas are further explored in our concept paper:
 
-**_“Building a Trusted, Reproducible Data Ecosystem”_** → [Read more](/link/to/data-ecosystem)
+**_“Building a Trusted and Reproducible Data Ecosystem with OCI”_** → [Read more](data-ecosystem-with-oci.md)
 
