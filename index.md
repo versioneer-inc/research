@@ -1,5 +1,5 @@
 ---
-title: "Research Statement"
+title: "Our Commitment"
 ---
 # Mission
 
