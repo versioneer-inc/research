@@ -25,3 +25,5 @@ site:
     favicon: public/images/favicon_versioneer.ico
     logo: public/images/logo_versioneer_white.png
     style: public/main.css
+    static:
+      - public
