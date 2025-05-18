@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.oci.image.config.v1+json",
+  "artifactType": "application/vnd.whatever.v1+tar",
+  "dataset": "PASTIS-HD",
+  "created_by": "IGN",
+  "license": "etalab-2.0",
+  "tiles": [
+    {
+      "tile": "t30uxv",
+      "bounding_box": {
+        "minx": 363699.72588260216,
+        "miny": 6842288.5427378975,
+        "maxx": 471523.17614071444,
+        "maxy": 6958087.14156515
+      },
+      "temporal_coverage": {
+        "S1A": {
+          "start": 20181004,
+          "end": 20191204,
+          "count": 65
+        },
+        "S1D": {
+          "start": 20181002,
+          "end": 20191202,
+          "count": 70
+        },
+        "S2": {
+          "start": 20180924,
+          "end": 20191019,
+          "count": 43
+        }
+      },
+      "layer_digest": "sha256:00804add9f28f54ca18ad10c249d8d35adc83445fdbe27eeb0ccac9200ec1f22",
+      "layer_mediaType": "application/vnd.oci.image.layer.v1.tar"
+    },
+    {
+      "tile": "t31tfj",
+      "bounding_box": {
+        "minx": 802518.4751780948,
+        "miny": 6244474.937699021,
+        "maxx": 908891.7850479226,
+        "maxy": 6349417.542317636
+      },
+      "temporal_coverage": {
+        "S1A": {
+          "start": 20181001,
+          "end": 20191201,
+          "count": 71
+        },
+        "S1D": {
+          "start": 20181006,
+          "end": 20191130,
+          "count": 70
+        },
+        "S2": {
+          "start": 20180917,
+          "end": 20191027,
+          "count": 61
+        }
+      },
+      "layer_digest": "sha256:5aedefa44cb7a2734f7b9f7ba663fe4a021eceec2544b55a9c800f61b586e5e0",
+      "layer_mediaType": "application/vnd.oci.image.layer.v1.tar"
+    },
+    {
+      "tile": "t31tfm",
+      "bounding_box": {
+        "minx": 801218.5987733917,
+        "miny": 6541675.540056112,
+        "maxx": 908655.9347564826,
+        "maxy": 6649123.634602138
+      },
+      "temporal_coverage": {
+        "S1A": {
+          "start": 20181001,
+          "end": 20191201,
+          "count": 71
+        },
+        "S1D": {
+          "start": 20181005,
+          "end": 20191129,
+          "count": 69
+        },
+        "S2": {
+          "start": 20180920,
+          "end": 20191025,
+          "count": 46
+        }
+      },
+      "layer_digest": "sha256:6689794cbe532146e655cd9478575143fec84489d4b24526dfd973a2cb2a4640",
+      "layer_mediaType": "application/vnd.oci.image.layer.v1.tar"
+    },
+    {
+      "tile": "t32ulu",
+      "bounding_box": {
+        "minx": 941951.9043822229,
+        "miny": 6743041.037451558,
+        "maxx": 1051200.956177081,
+        "maxy": 6859518.94950735
+      },
+      "temporal_coverage": {
+        "S1A": {
+          "start": 20181002,
+          "end": 20191202,
+          "count": 71
+        },
+        "S1D": {
+          "start": 20181006,
+          "end": 20191130,
+          "count": 70
+        },
+        "S2": {
+          "start": 20180917,
+          "end": 20191012,
+          "count": 38
+        }
+      },
+      "layer_digest": "sha256:dfb8d650e8c49ee0fce2ea0702113f3a4bb48a4358ff78bb818bbe81855e1835",
+      "layer_mediaType": "application/vnd.oci.image.layer.v1.tar"
+    }
+  ]
+}

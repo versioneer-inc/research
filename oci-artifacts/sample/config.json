@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 2,
+  "mediaType": "application/vnd.oci.image.config.v1+json",
+  "artifactType": "application/vnd.whatever.v1+tar",
+  "tile": "t30uxv",
+  "patches": [
+    {
+      "patch_id": "10000",
+      "parcel_count": 119,
+      "temporal_coverage": {
+        "start": "2018-09-24",
+        "end": "2019-12-04"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                391504.7355450863,
+                6956805.915242429
+              ],
+              [
+                392781.90612797183,
+                6956707.2616562415
+              ],
+              [
+                392683.2488295328,
+                6955430.101275591
+              ],
+              [
+                391406.092152948,
+                6955528.748381898
+              ],
+              [
+                391504.7355450863,
+                6956805.915242429
+              ]
+            ]
+          ]
+        ]
+      },
+      "layer_digest": "sha256:7cff937ff47cf327ab3fe27310da670719f87e86cd1f72c24459c3b542e505e0",
+      "layer_mediaType": "application/vnd.oci.image.layer.v1.tar"
+    },
+    {
+      "patch_id": "10001",
+      "parcel_count": 111,
+      "temporal_coverage": {
+        "start": "2018-09-24",
+        "end": "2019-12-04"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                367628.56220450543,
+                6880296.821825237
+              ],
+              [
+                368905.0648159213,
+                6880198.702347059
+              ],
+              [
+                368806.9426942048,
+                6878922.20777039
+              ],
+              [
+                367530.4507529661,
+                6879020.321867251
+              ],
+              [
+                367628.56220450543,
+                6880296.821825237
+              ]
+            ]
+          ]
+        ]
+      },
+      "layer_digest": "sha256:b9af2a69dee30874cb6687f0e36188292442da236beaf6ccd699c4f2e231fe3c",
+      "layer_mediaType": "application/vnd.oci.image.layer.v1.tar"
+    },
+    {
+      "patch_id": "10002",
+      "parcel_count": 131,
+      "temporal_coverage": {
+        "start": "2018-09-24",
+        "end": "2019-12-04"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                388950.37506799435,
+                6957003.180599397
+              ],
+              [
+                390227.55850683403,
+                6956904.554892058
+              ],
+              [
+                390128.92902673554,
+                6955627.381606417
+              ],
+              [
+                388851.7595056589,
+                6955726.000943417
+              ],
+              [
+                388950.37506799435,
+                6957003.180599397
+              ]
+            ]
+          ]
+        ]
+      },
+      "layer_digest": "sha256:6f57fa9c759fc3c70f1717eccfd8381f89188bb72b66bd95f0215f1b84f773b5",
+      "layer_mediaType": "application/vnd.oci.image.layer.v1.tar"
+    }
+  ],
+  "dataset": "PASTIS-HD",
+  "created_by": "IGN",
+  "license": "etalab-2.0"
+}
