@@ -1,5 +1,8 @@
-#!/bin/bash
+---
+title: Build & Push (4 tiles)
+---
 
+```sh
 set -e
 
 if [[ $# -ne 1 ]]; then
@@ -71,3 +74,4 @@ oras push --verbose "$repo" \
   --artifact-type application/vnd.whatever.v1+tar \
   --config "${config_path}:application/vnd.oci.image.config.v1+json" \
   "${layers[@]}"
+```

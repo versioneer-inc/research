@@ -15,6 +15,13 @@ project:
         - file: oci-artifacts/paper-oci-supply-chain.md
           children:
             - file: oci-artifacts/paper-evaluation-setup.ipynb
+              children:
+                - file: oci-artifacts/scripts/0_initial-partitioning-2433.ipynb                
+                - file: oci-artifacts/scripts/1_generate-config-2433.ipynb
+                - file: oci-artifacts/scripts/2_build_push-2433.sh.md
+                - file: oci-artifacts/scripts/0_initial-partitioning-t4.ipynb
+                - file: oci-artifacts/scripts/1_generate-config-t4.ipynb                
+                - file: oci-artifacts/scripts/2_build_push-t4.sh.md
             - file: oci-artifacts/paper-results.ipynb
         - file: oci-artifacts/data-ecosystem-with-oci.md
 
