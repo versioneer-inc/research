@@ -24,7 +24,7 @@ case "$provider" in
     ;;
   harbor)
     registry="qr2wz4td.c1.de1.container-registry.ovh.net"
-    repo_name="/versioneer/pastis-2433"
+    repo_name="versioneer/pastis-2433"
     ;;
   aws)
     registry="767397985165.dkr.ecr.eu-central-1.amazonaws.com"

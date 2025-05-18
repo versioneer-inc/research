@@ -10,6 +10,6 @@ The paper explores how OCI-based registries can act as a unifying layer for dist
 
 → To be presented at **[FOSS4G Europe 2025](https://talks.osgeo.org/foss4g-europe-2025/talk/HNZK37/)**.
 
-→ Read the [full paper](https://raw.githubusercontent.com/versioneer-inc/research/main/public/papers/oci-supply-chain_draft.pdf) (PDF) 
+→ Read the [full paper](https://raw.githubusercontent.com/versioneer-inc/research/main/public/papers/Towards_Standardization_Of_The_EO_Data_Product_Supply_Chain_Achtsnit_Roesel_Meissl_Fullpaper_Final.pdf) (PDF).
 
-→ Explore our [evaluation setup](paper-evaluation-setup.ipynb) and [results](paper-results.ipynb)
+→ Explore our [evaluation benchmark](paper-evaluation-benchmark.ipynb) for details on the setup and a discussion of the results.
