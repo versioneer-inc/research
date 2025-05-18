@@ -229,4 +229,4 @@ Pull back:
 oras pull localhost:5000/eo/products:v1 --output ./retrieved
 ```
 
-Please find the full example as shell script [here](./scripts/oras.sh).
+Please find the full example as shell script [here](oras_101_script).
